@@ -1,0 +1,140 @@
+# update
+sudo yum update
+
+# Vim
+sudo yum -y install vim
+
+# Wget
+sudo yum -y install wget
+
+# Git
+sudo yum -y install git
+
+# Docker
+# sudo yum -y install docker # 使わない
+curl -sSL https://get.docker.com/ | sh
+----------
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like:
+
+  sudo usermod -aG docker your-user
+
+Remember that you will have to log out and back in for this to take effect!
+----------
+
+sudo systemctl start docker.service
+sudo systemctl enable docker.service
+
+
+# Docker Compese
+sudo su -
+curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
+# rbenv
+git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+exec $SHELL -l
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+sudo yum -y --enablerepo=remi,epel  install libyaml libyaml-devel zlib zlib-devel readline readline-devel openssl openssl-devel libxml2 libxml2-devel libxslt libxslt-devel gcc glibc
+rbenv install --list
+rbenv install -v 2.2.3
+rbenv rehash
+rbenv versions
+rbenv global 2.2.3
+ruby -v
+
+# pyenv
+sudo yum -y  groupinstall "Development tools"
+sudo yum -y install gcc zlib-devel bzip2-devel openssl-devel readline-devel ncurses-devel sqlite-devel gdbm-devel db4-devel expat-devel libpcap-devel xz-devel pcre-devel
+git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+exec $SHELL -l
+source .bash_profile
+pyenv install --list
+pyenv install 2.7.10
+pyenv install 3.4.3
+pyenv versions
+pyenv rehash
+pyenv global 2.7.10
+
+# Ansible
+easy_install --version
+sudo yum install -y epel-release
+sudo yum install -y sshpass
+sudo yum install -y python-devel
+sudo easy_install pip
+sudo pip install paramiko PyYAML Jinja2 httplib2
+git clone git://github.com/ansible/ansible.git --recursive
+source ~/.ansible/hacking/env-setup
+
+# Golang
+cd /usr/local/src
+sudo wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bash_profile
+
+# Packer
+sudo yum -y install unzip
+cd /usr/local/src
+sudo wget https://releases.hashicorp.com/packer/0.8.6/packer_0.8.6_linux_amd64.zip
+cd /usr/local/
+sudo mkdir packer
+cd /usr/local/packer/
+sudo cp -pi ../src/packer_0.8.6_linux_amd64.zip ./
+sudo unzip packer_0.8.6_linux_amd64.zip
+sudo rm -rf packer_0.8.6_linux_amd64.zip
+
+# awscli
+sudo easy_install pip
+pip install awscli
+aws --version
+aws configure
+echo 'complete -C aws_computer aws' >> ~/.bash_profile
+
+# NTP (Time symc)
+sudo yum -y install ntp
+sudo mv /etc/localtime /etc/localtime.org
+sudo ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+sudo systemctl start  ntpd.service
+sudo systemctl enable  ntpd.service
+ntpq -p
+date
+
+# Chef-zero
+gem install bundle
+mkdir chef-repo
+cd chef-repo
+vi Gemfile
+--------
+source "https://rubygems.org"
+
+gem 'chef'
+gem 'knife-zero'
+gem 'berkshelf'
+--------
+bundle install
+mkdir .chef
+vi .chef/knife.rb
+---------
+local_mode true
+---------
+
+# Capistrano
+mkdir capistrano
+cd capistrano/
+vi Gemfile
+----------
+source 'https://rubygems.org'
+  gem 'capistrano'
+----------
+ bundle install
+ bundle exec cap install
+
+
+https://downloads.chef.io/chef-dk/redhat
+

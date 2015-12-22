@@ -1,0 +1,20 @@
+
+Test Kitchen時エラー
+>>>>>> ------Exception-------
+>>>>>> Class: Kitchen::UserError
+>>>>>> Message: You must first install the Docker CLI tool http://www.docker.io/gettingstarted/
+>>>>>> ----------------------
+>>>>>> Please see .kitchen/logs/kitchen.log for more details
+>>>>>> Also try running `kitchen diagnose --all` for configuration
+------------------
+capistrano 実行時エラー
+----------
+(Backtrace restricted to imported tasks)
+cap aborted!
+ArgumentError: wrong number of arguments (1 for 2..3)
+----------
+
+
+→http://blog.tsunokawa.net/entry/2014/08/03/183049
+
+
