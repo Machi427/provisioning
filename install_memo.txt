@@ -138,3 +138,30 @@ source 'https://rubygems.org'
 
 https://downloads.chef.io/chef-dk/redhat
 
+# Tmux
+sudo yum -y install tmux
+
+# Java
+sudo rpm -ivh jdk-8u65-linux-x64.rpm
+
+# Elasticsearch
+cd /usr/local/src/
+sudo wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.4.noarch.rpm
+sudo rpm -ivh elasticsearch-1.7.4.noarch.rpm
+sudo systemctl start elasticsearch.service
+
+# Elasticsearch plugin(kuromoji)
+sudo /usr/share/elasticsearch/bin/plugin --install elasticsearch/elasticsearch-analysis-kuromoji/2.7.0
+
+# mysql
+sudo yum remove mariadb-lib
+sudo wget http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-5.6.25-1.el7.x86_64.rpm-bundle.tar
+sudo yum install net-tools
+sudo rpm -ivh MySQL-client-5.6.25-1.el7.x86_64.rpm
+sudo rpm -ivh MySQL-devel-5.6.25-1.el7.x86_64.rpm
+sudo rpm -ivh MySQL-embedded-5.6.25-1.el7.x86_64.rpm
+sudo rpm -ivh MySQL-server-5.6.25-1.el7.x86_64.rpm
+sudo rpm -ivh MySQL-shared-5.6.25-1.el7.x86_64.rpm
+sudo rpm -ivh MySQL-shared-compat-5.6.25-1.el7.x86_64.rpm
+sudo rpm -ivh MySQL-test-5.6.25-1.el7.x86_64.rpm
+sudo cat /home/root/.mysql_secret
