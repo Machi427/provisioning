@@ -153,6 +153,12 @@ sudo systemctl start elasticsearch.service
 # Elasticsearch plugin(kuromoji)
 sudo /usr/share/elasticsearch/bin/plugin --install elasticsearch/elasticsearch-analysis-kuromoji/2.7.0
 
+# Elasticsearch plugin(HQ)
+sudo /usr/share/elasticsearch/bin/plugin --install royrusso/elasticsearch-HQ
+
+# Elasticsearch plugin(head)
+sudo /usr/share/elasticsearch/bin/plugin --install mobz/elasticsearch-head
+
 # mysql
 sudo yum remove mariadb-lib
 sudo wget http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-5.6.25-1.el7.x86_64.rpm-bundle.tar
@@ -165,3 +171,23 @@ sudo rpm -ivh MySQL-shared-5.6.25-1.el7.x86_64.rpm
 sudo rpm -ivh MySQL-shared-compat-5.6.25-1.el7.x86_64.rpm
 sudo rpm -ivh MySQL-test-5.6.25-1.el7.x86_64.rpm
 sudo cat /home/root/.mysql_secret
+
+# kibana
+cd /usr/local/src/
+sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.4-linux-x64.tar.gz
+sudo tar xvzf kibana-4.1.4-linux-x64.tar.gz
+sudo mv kibana-4.1.4-linux-x64 ../kibana
+vi /usr/local/kibana/config/kibana.yml
+------
+elasticsearch_url: "http://157.7.220.18:9200"
+------
+sudo vi /etc/systemd/system/kibana4.service
+sudo systemctl start kibana4
+sudo systemctl stop kibana4
+
+# node.js
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
+source ~/.bashrc
+nvm install v0.12.4
+nvm alias default v0.12.4
+node -v
